@@ -138,7 +138,7 @@ export default {
         setTimeout(() => {
           this.music = require('../assets/song-final.mp3')
           this.playMusic = true
-        }, 3000) 
+        }, 3500) 
         this.processing = true
       }
     },
