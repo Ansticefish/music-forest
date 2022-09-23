@@ -51,7 +51,7 @@ export default {
   },
   data () {
     return {
-      currentStep: 5,
+      currentStep: 0,
       rain: false,
       cloud: 0,
       rainDrop: 0,

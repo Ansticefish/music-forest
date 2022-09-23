@@ -45,7 +45,7 @@ export default {
     }
     &__words {
       position: absolute;
-      top: 40%;
+      top: 35%;
       left: 20%;
       width: 64%;
       color: rgb(147, 83, 83);
