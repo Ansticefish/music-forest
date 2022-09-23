@@ -69,8 +69,10 @@ export default {
 <style lang="scss" scoped>
 .background {
     position: fixed;
-    width: 100vw;
-    height: 100vh;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
     background-color: rgba(172, 138, 138, 0.6);
     z-index: 100;
     display: flex;
@@ -90,9 +92,10 @@ export default {
     }
     &__img {
       width: 100%;
+      margin-top: 10px;
     }
     &__btn {
-      margin-left: 75%;
+      margin-left: 70%;
       margin-top: 15px;
       width: fit-content;
       padding: 8px 15px;

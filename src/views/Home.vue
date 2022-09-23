@@ -153,7 +153,9 @@ export default {
 .home {
   position: relative;
   width: 100vw;
+  max-width: 1000px;
   height: 100vh;
+  margin: 0 auto;
   overflow: hidden;
   &__cloud {
     position: absolute;
@@ -167,7 +169,7 @@ export default {
   &__plants {
     position: absolute;
     bottom: 15px;
-    left: 15px;
+    left: 12%;
     width: 100%;
     display: flex;
     align-items: flex-end;
@@ -182,6 +184,7 @@ export default {
     &__rabbit {
       margin-bottom: 5%;
       width: 50%;
+      max-width: 300px;
       &__one {
         width: 45%;
       }
@@ -213,7 +216,8 @@ export default {
     position: absolute;
     bottom: 10%;
     right: 3%;
-    width: 10%;
+    width: 15%;
+    max-width: 150px;
     z-index: 1;
     cursor: pointer;
   }
@@ -221,9 +225,10 @@ export default {
     position: absolute;
     bottom: 0;
     width: 100%;
+    max-height: 230px;
   }
   &__instruction {
-    margin: 55% auto;
+    margin: 250px auto;
     background-color: rgba(230, 153, 112, 0.7);
     border-radius: 14px;
     padding: 20px;

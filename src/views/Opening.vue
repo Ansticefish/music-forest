@@ -27,22 +27,27 @@ export default {
 
 <style lang="scss" scoped>
 .opening {
+  position: relative;
   width: 100vw;
-  height: 80vh;
+  max-width: 1000px;
+  height: 89.5vh;
+  box-sizing: border-box;
+  margin: 0px auto;
   &__intro {
     position: relative;
     box-sizing: border-box;
-    margin-top: 30%;
+    margin: 100px auto;
     width: 95%;
+    max-width: 500px;
     height: fit-content;
     &__img {
       width: 100%;
     }
     &__words {
       position: absolute;
-      top: 28%;
+      top: 40%;
       left: 20%;
-      width: 65%;
+      width: 64%;
       color: rgb(147, 83, 83);
       line-height: 35px;
       font-size: 25px;
@@ -64,7 +69,7 @@ export default {
       cursor: pointer;
       h1 {
         color: white;
-        font-size: 40px;
+        font-size: 35px;
       }
     }
   }
@@ -73,6 +78,7 @@ export default {
     bottom: 6%;
     right: 3%;
     width: 30%;
+    max-width: 250px;
     z-index: 1;
   }
   &__soil {
