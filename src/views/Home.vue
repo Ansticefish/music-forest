@@ -51,7 +51,7 @@ export default {
   },
   data () {
     return {
-      currentStep: 0,
+      currentStep: 5,
       rain: false,
       cloud: 0,
       rainDrop: 0,
@@ -133,12 +133,11 @@ export default {
       this.playMusic = false 
       if (this.currentStep === 7) {
         this.rain = true
-        this.rain = true
         this.cloud = require('../assets/cloud-final.png')
         setTimeout(() => {
           this.music = require('../assets/song-final.mp3')
           this.playMusic = true
-        }, 3500) 
+        }, 500) 
         this.processing = true
       }
     },

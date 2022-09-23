@@ -55,7 +55,6 @@ export default {
     return {
       content: data[this.step -1].content,
       image: data[this.step - 1].img,
-      orange: true,
     }
   },
   methods: {
