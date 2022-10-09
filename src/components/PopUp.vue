@@ -103,6 +103,10 @@ export default {
       cursor: pointer;
       color: white;
       font-size: 25px;
+      &:hover {
+          opacity: 0.4;
+          transition: opacity 0.5s;
+        }
     }
   }
 </style>

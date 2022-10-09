@@ -67,6 +67,10 @@ export default {
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      &:hover {
+        transform: scale(110%);
+        transition: all 1s;
+      }
       h1 {
         color: white;
         font-size: 35px;

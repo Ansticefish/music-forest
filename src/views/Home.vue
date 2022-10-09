@@ -1,13 +1,13 @@
 <template>
   <div class="home">
     <!-- Cloud & Rain -->
-    <img class="home__cloud" v-if="rain" :src="cloud" alt="">
+    <img :class="['home__cloud', {'cloudMove': currentStep > 7}]" v-if="rain" :src="cloud" alt="">
     <img class="home__rain" v-if="rain" :src="rainDrop" alt="">
     <!-- Plants -->
     <div class="home__plants">
-      <img class="home__plants__one" v-if="currentStep > 0" :src="plants[0]" alt="">
-      <img class="home__plants__two" v-if="currentStep > 1" :src="plants[1]" alt="">
-      <div class="home__plants__rabbit">
+      <img :class="['home__plants__one', { 'plantMove': currentStep > 7}]" v-if="currentStep > 0" :src="plants[0]" alt="">
+      <img :class="['home__plants__two', {'plantMove': currentStep > 7}]" v-if="currentStep > 1" :src="plants[1]" alt="">
+      <div :class="['home__plants__rabbit', { 'rabbitMove': currentStep > 7}]">
         <img class="home__plants__rabbit__one" 
         v-if="currentStep > 2" 
         :src="plants[2]" alt="">
@@ -33,9 +33,11 @@
     <img class="home__soil" src="../assets/soil.png" alt="">
     <!-- Instruction -->
     <div class="home__instruction" v-if="openInstruction">
-      連續點擊蝸牛兩下，就可以召喚七彩雲朵囉！
-      <div class="home__instruction__btn" @click="closeInstruction"> OK </div>
-    </div>
+      <div class="home__instruction__content" v-if="openInstruction">
+        連續點擊蝸牛兩下，就可以選擇想召喚的七彩雲朵囉！
+        <div class="home__instruction__content__btn" @click="closeInstruction"> OK </div>
+      </div>
+    </div>  
     <div class="home__btn" v-show="showBtn && !processing">
       <div :class="['home__btn__red', {'clicked': colorUsed.red.length} ]" @click.once="callRain('red')"></div>
       <div :class="['home__btn__orange', {'clicked': colorUsed.orange.length} ]" @click.once="callRain('orange')" ></div>
@@ -183,6 +185,7 @@ export default {
       this.playMusic = false 
       this.processing = false
       if (this.currentStep === 7) {
+        this.currentStep += 1
         this.rain = true
         this.rainDrop = ''
         this.cloud = require('../assets/cloud-final.png')
@@ -229,10 +232,12 @@ export default {
     position: absolute;
     top: 0;
     width: 100%;
+    animation: cloudFloat 3s alternate infinite;
   }
   &__rain {
     position: absolute;
     width: 100%;
+    animation: raining 1.5s alternate infinite;
   }
   &__plants {
     position: absolute;
@@ -248,6 +253,7 @@ export default {
     &__two {
       margin-bottom: 10%;
       width: 10%;
+      z-index: 15;
     }
     &__rabbit {
       margin-bottom: 5%;
@@ -286,16 +292,30 @@ export default {
     right: 3%;
     width: 15%;
     max-width: 150px;
-    z-index: 1;
+    z-index: 30;
     cursor: pointer;
+    &:hover {
+      width: 17%;
+      transform: rotate(-15deg);
+      transition: all 0.5s;
+    }
   }
   &__soil {
     position: absolute;
     bottom: 0;
     width: 100%;
     max-height: 230px;
+    z-index: 20;
   }
   &__instruction {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(172, 138, 138, 0.6);
+  z-index: 100;
+  &__content {
     margin: 250px auto;
     background-color: rgba(230, 153, 112, 0.7);
     border-radius: 14px;
@@ -320,6 +340,7 @@ export default {
       }
     }
   }
+  }
   &__btn {
     position: absolute;
     bottom: 20%;
@@ -330,8 +351,9 @@ export default {
     display: grid;
     grid-template-columns: repeat(2, auto);
     grid-template-rows: repeat(4, auto);
-    grid-gap: 8px; 
-    padding: 8px;
+    grid-gap: 10px; 
+    padding: 10px;
+    z-index: 25;
     & div {
       width: 10vw;
       height: 10vw;
@@ -343,6 +365,8 @@ export default {
       cursor: pointer;
       &:hover {
         opacity: 0.2;
+        width: 11vw;
+        height: 11vw;
         transition: opacity 0.5s;
       }
       &.clicked {
@@ -371,6 +395,66 @@ export default {
     &__purple {
       background-image: url('../assets/btn-purple.png');
     }
+  }
+}
+
+.cloudMove {
+  animation: cloudMove 2s alternate infinite;
+}
+
+.rabbitMove {
+  animation: rabbitMove 3s alternate infinite;
+}
+
+.plantMove {
+  animation: plantMove 1s alternate infinite;
+}
+
+@keyframes cloudFloat {
+  from {
+    transform: translateX(-10%);
+  }
+
+  to {
+    transform: translateX(5%);
+  }
+}
+
+@keyframes raining {
+  from { 
+    transform: translateY(-5%);
+  }
+  to {
+    opacity: 0.2;
+    transform: translate(10%);
+  }
+}
+
+// animations for the final step
+
+@keyframes cloudMove {
+  from {
+    transform: translateY(-10%);
+  }
+
+  to {
+    transform: translate(5%);
+  }
+}
+
+@keyframes rabbitMove {
+  to {
+    transform: translateY(15%);
+  }
+}
+
+@keyframes plantMove {
+  from {
+    transform: rotate(-5deg);
+  }
+  to {
+    transform: rotate(5deg);
+    transform-origin: bottom;
   }
 }
 </style>
