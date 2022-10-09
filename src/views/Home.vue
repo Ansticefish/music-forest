@@ -183,7 +183,9 @@ export default {
     togglePopUp () {
       this.openPopUp = !this.openPopUp
       this.playMusic = false 
-      this.processing = false
+      setTimeout(() => {
+        this.processing = false
+      }, 500)  
       if (this.currentStep === 7) {
         this.currentStep += 1
         this.rainDrop = ''
@@ -356,8 +358,8 @@ export default {
     padding: 10px;
     z-index: 25;
     & div {
-      width: 10vw;
-      height: 10vw;
+      width: 13vw;
+      height: 13vw;
       max-width: 100px;
       max-height: 100px;
       background-color: rgba(204, 170, 170, 0.2);
@@ -366,8 +368,8 @@ export default {
       cursor: pointer;
       &:hover {
         opacity: 0.2;
-        width: 11vw;
-        height: 11vw;
+        width: 15vw;
+        height: 15vw;
         transition: opacity 0.5s;
       }
       &.clicked {
