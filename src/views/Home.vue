@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <!-- Cloud & Rain -->
-    <img :class="['home__cloud', {'cloudMove': currentStep > 7}]" v-if="rain" :src="cloud" alt="">
-    <img class="home__rain" v-if="rain" :src="rainDrop" alt="">
+    <img :class="['home__cloud', {'cloudMove': currentStep > 7}]" v-show="rain" :src="cloud" alt="">
+    <img class="home__rain" v-show="rain" :src="rainDrop" alt="">
     <!-- Plants -->
     <div class="home__plants">
       <img :class="['home__plants__one', { 'plantMove': currentStep > 7}]" v-if="currentStep > 0" :src="plants[0]" alt="">
@@ -28,7 +28,7 @@
       </div>
     </div>
     <!-- Snail & Soil -->
-    <img class="home__snail" @dblclick="openButton" v-if="!processing"
+    <img class="home__snail" @dblclick="openButton" v-show="!processing"
     src="../assets/snail.png" alt="">
     <img class="home__soil" src="../assets/soil.png" alt="">
     <!-- Instruction -->
@@ -39,13 +39,13 @@
       </div>
     </div>  
     <div class="home__btn" v-show="showBtn && !processing">
-      <div :class="['home__btn__red', {'clicked': colorUsed.red.length} ]" @click.once="callRain('red')"></div>
-      <div :class="['home__btn__orange', {'clicked': colorUsed.orange.length} ]" @click.once="callRain('orange')" ></div>
-      <div :class="['home__btn__yellow', {'clicked': colorUsed.yellow.length} ]" @click.once="callRain('yellow')" ></div>
-      <div :class="['home__btn__green', {'clicked': colorUsed.green.length} ]" @click.once="callRain('green')" ></div>
-      <div :class="['home__btn__blue', {'clicked': colorUsed.blue.length} ]" @click.once="callRain('blue')" ></div>
-      <div :class="['home__btn__lightb', {'clicked': colorUsed.lightb.length} ]" @click.once="callRain('lightb')" ></div>
-      <div :class="['home__btn__purple', {'clicked': colorUsed.purple.length} ]" @click.once="callRain('purple')" ></div>
+      <div :class="['home__btn__red', {'clicked': colorUsed.red.length} ]" @click="callRain('red')"></div>
+      <div :class="['home__btn__orange', {'clicked': colorUsed.orange.length} ]" @click="callRain('orange')" ></div>
+      <div :class="['home__btn__yellow', {'clicked': colorUsed.yellow.length} ]" @click="callRain('yellow')" ></div>
+      <div :class="['home__btn__green', {'clicked': colorUsed.green.length} ]" @click="callRain('green')" ></div>
+      <div :class="['home__btn__blue', {'clicked': colorUsed.blue.length} ]" @click="callRain('blue')" ></div>
+      <div :class="['home__btn__lightb', {'clicked': colorUsed.lightb.length} ]" @click="callRain('lightb')" ></div>
+      <div :class="['home__btn__purple', {'clicked': colorUsed.purple.length} ]" @click="callRain('purple')" ></div>
     </div>
     <PopUp v-if="openPopUp" :step="currentStep" @close="togglePopUp" />
     <audio autoplay v-if="playMusic">
@@ -186,8 +186,8 @@ export default {
       this.processing = false
       if (this.currentStep === 7) {
         this.currentStep += 1
-        this.rain = true
         this.rainDrop = ''
+        this.rain = true
         this.cloud = require('../assets/cloud-final.png')
         setTimeout(() => {
           this.music = require('../assets/song-final.mp3')
@@ -197,6 +197,7 @@ export default {
       }
     },
     callRain(color) {
+      if (this.colorUsed[color] === 'true') return
       this.processing = true
       this.rain = true
       setTimeout(() => {
@@ -373,6 +374,10 @@ export default {
         opacity: 0.15;
         cursor: default;
       }
+      &.clicked:hover {
+        width: 10vw;
+        height: 10vw;
+      }
     }
     &__red {
       background-image: url('../assets/btn-red.png');
@@ -433,11 +438,8 @@ export default {
 // animations for the final step
 
 @keyframes cloudMove {
-  from {
-    transform: translateY(-10%);
-  }
-
   to {
+    opacity: 0.8;
     transform: translate(5%);
   }
 }
