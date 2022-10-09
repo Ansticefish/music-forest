@@ -194,8 +194,8 @@ export default {
         setTimeout(() => {
           this.music = require('../assets/song-final.mp3')
           this.playMusic = true
+          this.processing = true
         }, 500) 
-        this.processing = true
       }
     },
     callRain(color) {
@@ -240,7 +240,7 @@ export default {
   &__rain {
     position: absolute;
     width: 100%;
-    animation: raining 1.5s alternate infinite;
+    animation: raining 1s alternate infinite;
   }
   &__plants {
     position: absolute;
@@ -377,8 +377,8 @@ export default {
         cursor: default;
       }
       &.clicked:hover {
-        width: 10vw;
-        height: 10vw;
+        width: 13vw;
+        height: 13vw;
       }
     }
     &__red {
