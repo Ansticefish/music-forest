@@ -15,7 +15,7 @@ cd dist
 git init
 git branch -M main
 git add -A
-git commit -m 'deploy: version3 testing'
+git commit -m 'deploy: version3 (add color buttons and animation)'
 
 # if you are deploying to https://<USERNAME>.github.io
 # git push -f https://github.com/<USERNAME>/<USERNAME>.GitHub.io.git main
